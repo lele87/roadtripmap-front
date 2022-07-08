@@ -1,8 +1,8 @@
 import "./App.css";
-import Maps from "./components/Maps/Maps";
+import WelcomeForm from "./components/WelcomeForm/WelcomeForm";
 
 function App() {
-  return <Maps />;
+  return <WelcomeForm />;
 }
 
 export default App;

@@ -29,7 +29,7 @@ const Maps = () => {
     <StyledMaps className="leaflet-container">
       <MapContainer
         center={[41.346176, 2.168365]}
-        zoom={13}
+        zoom={12}
         scrollWheelZoom={true}
         className="map"
       >
