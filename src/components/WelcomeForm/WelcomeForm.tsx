@@ -76,8 +76,8 @@ const WelcomeForm = (): JSX.Element => {
                 Register
               </button>
               <div className="welcome-form_message">
-                <p>Already have an account?</p>
-                <span onClick={changeForm}>Click here</span>
+                <p>Already registered?</p>
+                <span onClick={changeForm}>Sign In</span>
               </div>
             </>
           )}
