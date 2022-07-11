@@ -31,7 +31,7 @@ const WelcomeForm = (): JSX.Element => {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    localStorage.getItem("token");
   }, [userInfo]);
 
   const handleSubmit = (event: { preventDefault: () => void }) => {
