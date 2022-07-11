@@ -1,4 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../redux/store/hooks";
+import {
+  userLoginThunk,
+  userRegisterThunk,
+} from "../../redux/thunks/usersThunks";
 import StyledWelcomeForm from "./StyledWelcomeForm";
 
 const WelcomeForm = (): JSX.Element => {
@@ -9,6 +14,8 @@ const WelcomeForm = (): JSX.Element => {
 
   const [formData, setFormData] = useState(blankFields);
   const [openingForm, setOpeningForm] = useState("loginForm");
+  const userInfo = useAppSelector((state) => state.user);
+  const dispatch = useAppDispatch();
 
   const changeData = (event: { target: { id: string; value: string } }) => {
     setFormData({
@@ -23,8 +30,18 @@ const WelcomeForm = (): JSX.Element => {
       : setOpeningForm("loginForm");
   };
 
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+  }, [userInfo]);
+
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
+
+    openingForm === "loginForm"
+      ? dispatch(userLoginThunk(formData))
+      : dispatch(userRegisterThunk(formData));
+
+    setFormData(blankFields);
   };
 
   return (
