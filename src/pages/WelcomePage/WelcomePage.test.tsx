@@ -1,13 +1,17 @@
 import { render, screen } from "@testing-library/react";
+import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import WelcomePage from "./WelcomePage";
+import store from "../../redux/store/store";
 
 describe("Given a Welcome Page", () => {
   describe("When it's invoked", () => {
     test("Then it should render a WelcomeText component and a WelcomeForm component", () => {
       render(
         <BrowserRouter>
-          <WelcomePage />
+          <Provider store={store}>
+            <WelcomePage />
+          </Provider>
         </BrowserRouter>
       );
 
