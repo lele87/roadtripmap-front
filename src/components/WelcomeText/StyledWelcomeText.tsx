@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
 const StyledWelcomeText = styled.div`
-  background-color: pink;
-
   .welcome__image--container {
     display: flex;
     justify-content: center;
@@ -15,7 +13,7 @@ const StyledWelcomeText = styled.div`
     font-family: "Cairo", sans-serif;
     font-weight: 700;
     color: #fff;
-    font-size: 35px;
+    font-size: 33px;
   }
 `;
 
