@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/store/hooks";
 import {
   userLoginThunk,
@@ -16,6 +17,7 @@ const WelcomeForm = (): JSX.Element => {
   const [openingForm, setOpeningForm] = useState("loginForm");
   const userInfo = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const changeData = (event: { target: { id: string; value: string } }) => {
     setFormData({
@@ -31,8 +33,11 @@ const WelcomeForm = (): JSX.Element => {
   };
 
   useEffect(() => {
-    localStorage.getItem("token");
-  }, [userInfo]);
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/home");
+    }
+  }, [navigate, userInfo]);
 
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
