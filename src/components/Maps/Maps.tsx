@@ -6,11 +6,13 @@ import {
   useMapEvents,
 } from "react-leaflet";
 import L, { Icon } from "leaflet";
-import locationsData from "../../data/locations";
 import StyledMaps from "./StyledMaps";
+import { useAppSelector } from "../../redux/store/hooks";
 
 const Maps = () => {
-  const geoIcon = new Icon({
+  const locations = useAppSelector((state) => state.location);
+
+  const markerIcon = new Icon({
     iconUrl: "/images/geo-icon.png",
     iconSize: [46, 46],
   });
@@ -19,7 +21,7 @@ const Maps = () => {
     const map = useMapEvents({
       click: (e) => {
         const { lat, lng } = e.latlng;
-        L.marker([lat, lng], { icon: geoIcon }).addTo(map);
+        L.marker([lat, lng], { icon: markerIcon }).addTo(map);
       },
     });
     return null;
@@ -37,14 +39,14 @@ const Maps = () => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         />
-        {locationsData.features.map((location) => (
+        {locations.features.map((location) => (
           <Marker
-            key={location.properties.LOCATION_ID}
+            key={location.properties.id}
             position={[
               location.geometry.coordinates[0],
               location.geometry.coordinates[1],
             ]}
-            icon={geoIcon}
+            icon={markerIcon}
           >
             <Popup
               position={[
@@ -53,8 +55,8 @@ const Maps = () => {
               ]}
             >
               <div>
-                <h2>{location.properties.NAME}</h2>
-                <p>{location.properties.DESCRIPTIO}</p>
+                <h2>{location.properties.name}</h2>
+                <p>{location.properties.description}</p>
               </div>
             </Popup>
             <MyComponent />
