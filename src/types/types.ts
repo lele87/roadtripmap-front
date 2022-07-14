@@ -28,3 +28,21 @@ export interface ResponseApi {
     token: string;
   };
 }
+
+export interface Location {
+  type: string;
+  properties: {
+    id: string;
+    name: string;
+    description: string;
+    images: string;
+  };
+  geometry: {
+    type: string;
+    coordinates: number[];
+  };
+}
+
+export interface LocationState {
+  features: Location[];
+}
