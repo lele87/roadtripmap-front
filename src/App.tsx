@@ -2,6 +2,7 @@ import jwtDecode from "jwt-decode";
 import { useEffect } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
+import AntiController from "./components/AntiController/AntiController";
 import Controller from "./components/Controller/Controller";
 import HomePage from "./pages/HomePage/HomePage";
 import WelcomePage from "./pages/WelcomePage/WelcomePage";
@@ -24,7 +25,14 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/welcome" />} />
-      <Route path="/welcome" element={<WelcomePage />} />
+      <Route
+        path="/welcome"
+        element={
+          <AntiController>
+            <WelcomePage />
+          </AntiController>
+        }
+      />
       <Route
         path="/home"
         element={
