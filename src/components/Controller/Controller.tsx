@@ -12,7 +12,7 @@ const Controller = ({ children }: Props) => {
 
   useEffect(() => {
     if (!logged) {
-      navigate("/login");
+      navigate("/welcome");
     }
   }, [logged, navigate]);
 

@@ -23,7 +23,7 @@ describe("Given a Controller function", () => {
         </Controller>
       );
 
-      expect(mockUseNavigate).toHaveBeenCalledWith("/login");
+      expect(mockUseNavigate).toHaveBeenCalledWith("/welcome");
     });
 
     test("Then it should render its children when the user is logged", () => {

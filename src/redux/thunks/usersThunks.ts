@@ -7,6 +7,10 @@ import {
   UserRegister,
 } from "../../types/types";
 import {
+  loadedOffActionCreator,
+  loadedOnActionCreator,
+} from "../features/uiSlice";
+import {
   loginActionCreator,
   registerActionCreator,
 } from "../features/usersSlice";
@@ -16,29 +20,43 @@ export const userRegisterThunk =
   (userData: UserRegister) => async (dispatch: AppDispatch) => {
     const url: string = `${process.env.REACT_APP_API_URL}user/register`;
 
-    const { data } = await axios.post(url, userData);
+    try {
+      dispatch(loadedOnActionCreator());
+      const { data } = await axios.post(url, userData);
+      dispatch(loadedOffActionCreator());
 
-    if (data) {
-      const newUser = {
-        username: userData.username,
-        password: userData.password,
-      };
-      dispatch(userLoginThunk(newUser));
+      if (data) {
+        const newUser = {
+          username: userData.username,
+          password: userData.password,
+        };
+        dispatch(userLoginThunk(newUser));
+      }
+      dispatch(registerActionCreator(data));
+    } catch (error: any) {
+      dispatch(loadedOffActionCreator());
+      return error.message;
     }
-    dispatch(registerActionCreator(data));
   };
 
 export const userLoginThunk =
   (userData: UserLogin) => async (dispatch: AppDispatch) => {
     const url: string = `${process.env.REACT_APP_API_URL}user/login`;
 
-    const {
-      data: { token },
-    }: ResponseApi = await axios.post(url, userData);
+    try {
+      dispatch(loadedOnActionCreator());
+      const {
+        data: { token },
+      }: ResponseApi = await axios.post(url, userData);
 
-    if (token) {
-      const { username, id }: DecodeToken = jwtDecode(token);
-      dispatch(loginActionCreator({ username, id }));
-      localStorage.setItem("token", token);
+      if (token) {
+        const { username, id }: DecodeToken = jwtDecode(token);
+        dispatch(loginActionCreator({ username, id }));
+        localStorage.setItem("token", token);
+        dispatch(loadedOffActionCreator());
+      }
+    } catch (error: any) {
+      dispatch(loadedOffActionCreator());
+      return error.message;
     }
   };
