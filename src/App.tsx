@@ -1,5 +1,6 @@
 import jwtDecode from "jwt-decode";
 import { useEffect } from "react";
+import { Toaster } from "react-hot-toast";
 import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import AntiController from "./components/AntiController/AntiController";
@@ -46,6 +47,7 @@ function App() {
           }
         />
       </Routes>
+      <Toaster position="bottom-center" reverseOrder={false} />
     </>
   );
 }

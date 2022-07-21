@@ -1,5 +1,6 @@
 import axios from "axios";
 import jwtDecode from "jwt-decode";
+import toast from "react-hot-toast";
 import {
   DecodeToken,
   ResponseApi,
@@ -35,6 +36,8 @@ export const userRegisterThunk =
       dispatch(registerActionCreator(data));
     } catch (error: any) {
       dispatch(loadedOffActionCreator());
+      toast.dismiss();
+      toast.error("Something went wrong");
       return error.message;
     }
   };
@@ -54,9 +57,13 @@ export const userLoginThunk =
         dispatch(loginActionCreator({ username, id }));
         localStorage.setItem("token", token);
         dispatch(loadedOffActionCreator());
+        toast.dismiss();
+        toast.success("Successfully logged");
       }
     } catch (error: any) {
       dispatch(loadedOffActionCreator());
+      toast.dismiss();
+      toast.success("Wrong username or password");
       return error.message;
     }
   };

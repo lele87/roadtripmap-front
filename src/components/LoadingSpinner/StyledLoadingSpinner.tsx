@@ -5,6 +5,7 @@ const StyledLoadingSpinner = styled.div`
   position: absolute;
   top: calc(50% - 170px);
   left: calc(50% - 40px);
+  z-index: 1000;
 
   .dot-pulse {
     --uib-size: 60px;
