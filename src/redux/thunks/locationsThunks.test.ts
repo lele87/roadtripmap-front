@@ -1,3 +1,4 @@
+import axios from "axios";
 import { mockLocations } from "../../mocks/mockLocations";
 import { server } from "../../mocks/server";
 import { loadLocationsActionCreator } from "../features/locationsSlice";
@@ -22,6 +23,27 @@ describe("Given a loadLocationsThunk function", () => {
       await thunk(dispatch);
 
       expect(dispatch).toHaveBeenCalledWith(loadAction);
+    });
+  });
+  describe("When it's called with an authorized token", () => {
+    test("Then it shouldn't call the toast's error method", async () => {
+      const dispatch = jest.fn();
+
+      const mockToast = jest.fn();
+
+      jest.mock("react-hot-toast", () => ({
+        error: mockToast,
+      }));
+
+      const userId = "1";
+
+      axios.get = jest.fn().mockRejectedValue({});
+
+      const thunk = loadLocationsThunk(userId);
+
+      await thunk(dispatch);
+
+      expect(mockToast).not.toHaveBeenCalled();
     });
   });
 });
