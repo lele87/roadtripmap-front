@@ -5,16 +5,20 @@ import {
   Popup,
   useMapEvents,
 } from "react-leaflet";
-import L, { Icon } from "leaflet";
+import L from "leaflet";
 import StyledMaps from "./StyledMaps";
 import { useAppSelector } from "../../redux/store/hooks";
+import SearchBar from "../SearchBar/SearchBar";
 
 const Maps = () => {
   const locations = useAppSelector((state) => state.location);
 
-  const markerIcon = new Icon({
-    iconUrl: "/images/geo-icon.png",
-    iconSize: [46, 46],
+  const markerIcon = L.icon({
+    iconSize: [25, 41],
+    iconAnchor: [10, 41],
+    popupAnchor: [2, -40],
+    iconUrl: "https://unpkg.com/leaflet@1.6/dist/images/marker-icon.png",
+    shadowUrl: "https://unpkg.com/leaflet@1.6/dist/images/marker-shadow.png",
   });
 
   function MyComponent() {
@@ -39,6 +43,7 @@ const Maps = () => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         />
+
         {locations.features.map((location) => (
           <Marker
             key={location.properties.id}
@@ -57,11 +62,17 @@ const Maps = () => {
               <div>
                 <h2>{location.properties.name}</h2>
                 <p>{location.properties.description}</p>
+                <img
+                  src={location.properties.images}
+                  alt={location.properties.name}
+                  width={300}
+                />
               </div>
             </Popup>
-            <MyComponent />
           </Marker>
         ))}
+        <SearchBar />
+        <MyComponent />
       </MapContainer>
     </StyledMaps>
   );
