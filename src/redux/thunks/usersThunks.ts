@@ -43,13 +43,20 @@ export const userLoginThunk =
   (userData: UserLogin) => async (dispatch: AppDispatch) => {
     const url: string = `${process.env.REACT_APP_API_URL}user/login`;
 
-    const {
-      data: { token },
-    }: ResponseApi = await axios.post(url, userData);
+    try {
+      dispatch(loadedOnActionCreator());
+      const {
+        data: { token },
+      }: ResponseApi = await axios.post(url, userData);
 
-    if (token) {
-      const { username, id }: DecodeToken = jwtDecode(token);
-      dispatch(loginActionCreator({ username, id }));
-      localStorage.setItem("token", token);
+      if (token) {
+        const { username, id }: DecodeToken = jwtDecode(token);
+        dispatch(loginActionCreator({ username, id }));
+        localStorage.setItem("token", token);
+        dispatch(loadedOffActionCreator());
+      }
+    } catch (error: any) {
+      dispatch(loadedOffActionCreator());
+      return error.message;
     }
   };
