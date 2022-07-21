@@ -1,6 +1,13 @@
 import styled from "styled-components";
 
 const StyledLoadingSpinner = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 160px 0;
+  position: absolute;
+  top: calc(50% - 170px);
+  left: calc(50% - 40px);
+
   .dot-pulse {
     --uib-size: 40px;
     --uib-speed: 1.3s;
