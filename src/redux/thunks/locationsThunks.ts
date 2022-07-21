@@ -5,6 +5,7 @@ import {
   loadedOffActionCreator,
   loadedOnActionCreator,
 } from "../features/uiSlice";
+import toast from "react-hot-toast";
 
 export const loadLocationsThunk =
   (userId: string) => async (dispatch: AppDispatch) => {
@@ -23,6 +24,8 @@ export const loadLocationsThunk =
       }
     } catch (error: any) {
       dispatch(loadedOffActionCreator());
+      toast.dismiss();
+      toast.error("Something went wrong");
       return error.message;
     }
   };
