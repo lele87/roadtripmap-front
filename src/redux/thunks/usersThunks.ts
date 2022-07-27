@@ -63,7 +63,7 @@ export const userLoginThunk =
     } catch (error: any) {
       dispatch(loadedOffActionCreator());
       toast.dismiss();
-      toast.success("Wrong username or password");
+      toast.error("Wrong username or password");
       return error.message;
     }
   };

@@ -12,7 +12,7 @@ describe("Given a load locations reducer", () => {
               id: "",
               name: "",
               description: "",
-              images: "",
+              image: "",
             },
             geometry: {
               type: "",
@@ -30,7 +30,7 @@ describe("Given a load locations reducer", () => {
               id: "1",
               name: "Lele's home",
               description: "Carrer Templers Home",
-              images: "",
+              image: "",
             },
             geometry: {
               type: "Point",
@@ -43,7 +43,7 @@ describe("Given a load locations reducer", () => {
               id: "2",
               name: "Francesco's home",
               description: "Carrer Carretes Home",
-              images: "",
+              image: "",
             },
             geometry: {
               type: "Point",

@@ -63,10 +63,12 @@ const Maps = () => {
                 <h2>{location.properties.name}</h2>
                 <p>{location.properties.description}</p>
                 <img
-                  src={location.properties.images}
+                  src={location.properties.image}
                   alt={location.properties.name}
                   width={300}
                 />
+
+                {/* <button onClick={() => setOpenModal(true)}>Add location</button> */}
               </div>
             </Popup>
           </Marker>

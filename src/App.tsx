@@ -6,6 +6,7 @@ import "./App.css";
 import AntiController from "./components/AntiController/AntiController";
 import Controller from "./components/Controller/Controller";
 import LoadingSpinner from "./components/LoadingSpinner/LoadingSpinner";
+import ModalForm from "./components/ModalForm/ModalForm";
 import HomePage from "./pages/HomePage/HomePage";
 import WelcomePage from "./pages/WelcomePage/WelcomePage";
 import { loginActionCreator } from "./redux/features/usersSlice";
@@ -26,29 +27,30 @@ function App() {
   }, [dispatch, logged]);
 
   return (
-    <>
-      {loaded && <LoadingSpinner />}
-      <Routes>
-        <Route path="/" element={<Navigate to="/welcome" />} />
-        <Route
-          path="/welcome"
-          element={
-            <AntiController>
-              <WelcomePage />
-            </AntiController>
-          }
-        />
-        <Route
-          path="/home"
-          element={
-            <Controller>
-              <HomePage />
-            </Controller>
-          }
-        />
-      </Routes>
-      <Toaster position="bottom-center" reverseOrder={false} />
-    </>
+    // <>
+    //   {loaded && <LoadingSpinner />}
+    //   <Routes>
+    //     <Route path="/" element={<Navigate to="/welcome" />} />
+    //     <Route
+    //       path="/welcome"
+    //       element={
+    //         <AntiController>
+    //           <WelcomePage />
+    //         </AntiController>
+    //       }
+    //     />
+    //     <Route
+    //       path="/home"
+    //       element={
+    //         <Controller>
+    //           <HomePage />
+    //         </Controller>
+    //       }
+    //     />
+    //   </Routes>
+    //   <Toaster position="bottom-center" reverseOrder={false} />
+    // </>
+    <ModalForm />
   );
 }
 
