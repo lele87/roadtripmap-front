@@ -1,5 +1,9 @@
+import { mockLocations } from "../../mocks/mockLocations";
 import { LocationState } from "../../types/types";
-import locationsSlice, { loadLocationsActionCreator } from "./locationsSlice";
+import locationsSlice, {
+  addLocationActionCreator,
+  loadLocationsActionCreator,
+} from "./locationsSlice";
 
 describe("Given a load locations reducer", () => {
   describe("When it receives an initial state and a load action with the locations info", () => {
@@ -56,9 +60,42 @@ describe("Given a load locations reducer", () => {
       const expectedState = locationsInfo;
 
       const loadAction = loadLocationsActionCreator(locationsInfo);
-      const locationStatus = locationsSlice(initialState, loadAction);
+      const newState = locationsSlice(initialState, loadAction);
 
-      expect(locationStatus).toEqual(expectedState);
+      expect(newState).toEqual(expectedState);
+    });
+  });
+});
+
+describe("Given an add locations reducer", () => {
+  describe("When it receives an initial state and an add action with the locations info", () => {
+    test("Then it should return the new location with the received info", () => {
+      const initialState: LocationState = {
+        features: [],
+      };
+
+      const locationInfo = {
+        type: "Feature",
+        properties: {
+          id: "1",
+          name: "Casa Battlo",
+          description: "",
+          image: "image.jpg",
+        },
+        geometry: {
+          type: "Point",
+          coordinates: [41.38184338079825, 2.1788420566189455],
+        },
+      };
+
+      const expectedState = {
+        features: [locationInfo],
+      };
+
+      const addLocationAction = addLocationActionCreator(locationInfo);
+      const newState = locationsSlice(initialState, addLocationAction);
+
+      expect(newState).toEqual(expectedState);
     });
   });
 });
