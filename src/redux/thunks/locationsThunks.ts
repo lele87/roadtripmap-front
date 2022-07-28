@@ -1,6 +1,9 @@
 import axios from "axios";
 import { AppDispatch } from "../store/store";
-import { loadLocationsActionCreator } from "../features/locationsSlice";
+import {
+  addLocationActionCreator,
+  loadLocationsActionCreator,
+} from "../features/locationsSlice";
 import {
   loadedOffActionCreator,
   loadedOnActionCreator,
@@ -25,6 +28,31 @@ export const loadLocationsThunk =
     } catch (error: any) {
       dispatch(loadedOffActionCreator());
       toast.dismiss();
+      toast.error("Something went wrong");
+      return error.message;
+    }
+  };
+
+export const addLocationThunk =
+  (formData: any, userId: string) => async (dispatch: AppDispatch) => {
+    const url: string = `${process.env.REACT_APP_API_URL}locations/${userId}`;
+    const token = localStorage.getItem("token");
+
+    try {
+      dispatch(loadedOnActionCreator());
+      const {
+        data: { new_location },
+      } = await axios.post(url, formData, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      if (new_location) {
+        dispatch(loadedOffActionCreator());
+        await dispatch(addLocationActionCreator(new_location));
+        dispatch(loadLocationsThunk(userId));
+      }
+    } catch (error: any) {
+      dispatch(loadedOffActionCreator());
       toast.error("Something went wrong");
       return error.message;
     }

@@ -49,3 +49,8 @@ export interface LocationForm {
   description: string;
   image: string[] | File[];
 }
+
+export interface newLocation {
+  coordinates: number[];
+  openForm: boolean;
+}

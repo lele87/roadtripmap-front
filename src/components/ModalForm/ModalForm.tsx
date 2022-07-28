@@ -1,4 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { closeFormActionCreator } from "../../redux/features/newLocationSlice";
+import { useAppDispatch, useAppSelector } from "../../redux/store/hooks";
+import { addLocationThunk } from "../../redux/thunks/locationsThunks";
 import { LocationForm } from "../../types/types";
 import StyledModalForm from "./StyledModalForm";
 
@@ -9,7 +12,19 @@ const ModalForm = (): JSX.Element => {
     image: [],
   };
 
+  const dispatch = useAppDispatch();
+  const { coordinates } = useAppSelector((state) => state.newLocation);
+  const { id } = useAppSelector((state) => state.user.userInfo);
   const [formData, setFormData] = useState(blankFields);
+
+  const clearForm = () => {
+    setFormData(blankFields);
+  };
+
+  const closeForm = () => {
+    dispatch(closeFormActionCreator());
+    clearForm();
+  };
 
   const handleChangeData = (
     event:
@@ -30,10 +45,28 @@ const ModalForm = (): JSX.Element => {
     });
   };
 
+  const submitNewLocation = (event: React.FormEvent) => {
+    event.preventDefault();
+
+    const newFormData = new FormData();
+
+    newFormData.append("name", formData.name);
+    newFormData.append("description", formData.description);
+    newFormData.append("latitude", coordinates[0].toString());
+    newFormData.append("longitude", coordinates[1].toString());
+    if (formData.image !== []) {
+      formData.image.forEach((image) => {
+        newFormData.append("image", image);
+      });
+
+      dispatch(addLocationThunk(newFormData, id));
+      setFormData(blankFields);
+      closeForm();
+    }
+  };
   return (
     <StyledModalForm className="modal__form">
-      {/* <div className="modal__background" onClick={() => setIsOpen(false)} /> */}
-      <form>
+      <form onSubmit={submitNewLocation}>
         <label htmlFor="name"></label>
         <input
           id="name"
@@ -68,7 +101,9 @@ const ModalForm = (): JSX.Element => {
           >
             Save
           </button>
-          <button className="form__buttons--close">Close</button>
+          <button className="form__buttons--close" onClick={closeForm}>
+            Close
+          </button>
         </div>
       </form>
     </StyledModalForm>

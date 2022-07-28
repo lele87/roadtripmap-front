@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import locationsReducer from "../features/locationsSlice";
+import newLocationReducer from "../features/newLocationSlice";
 import uiReducer from "../features/uiSlice";
 import usersReducer from "../features/usersSlice";
 
@@ -8,6 +9,7 @@ const store = configureStore({
     user: usersReducer,
     location: locationsReducer,
     ui: uiReducer,
+    newLocation: newLocationReducer,
   },
 });
 

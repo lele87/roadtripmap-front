@@ -7,11 +7,19 @@ import {
 } from "react-leaflet";
 import L from "leaflet";
 import StyledMaps from "./StyledMaps";
-import { useAppSelector } from "../../redux/store/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/store/hooks";
 import SearchBar from "../SearchBar/SearchBar";
+import {
+  addCoordinatesActionCreator,
+  openFormActionCreator,
+} from "../../redux/features/newLocationSlice";
 
 const Maps = () => {
+  const dispatch = useAppDispatch();
   const locations = useAppSelector((state) => state.location);
+  const openForm = () => {
+    dispatch(openFormActionCreator());
+  };
 
   const markerIcon = L.icon({
     iconSize: [25, 41],
@@ -22,10 +30,12 @@ const Maps = () => {
   });
 
   function MyComponent() {
-    const map = useMapEvents({
+    useMapEvents({
       click: (e) => {
         const { lat, lng } = e.latlng;
-        L.marker([lat, lng], { icon: markerIcon }).addTo(map);
+        dispatch(addCoordinatesActionCreator([lat, lng]));
+        dispatch(openFormActionCreator());
+        // L.marker([lat, lng], { icon: markerIcon }).addTo(map);
       },
     });
     return null;
@@ -68,7 +78,7 @@ const Maps = () => {
                   width={300}
                 />
 
-                {/* <button onClick={() => setOpenModal(true)}>Add location</button> */}
+                <button onClick={openForm}>Add location</button>
               </div>
             </Popup>
           </Marker>

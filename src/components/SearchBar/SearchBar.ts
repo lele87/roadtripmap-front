@@ -24,6 +24,7 @@ const SearchBar = () => {
       notFoundMessage: "Sorry, location not found.",
       showMarker: true,
       showPopup: false,
+      autoClose: true,
       searchLabel: "search",
       marker: { icon: markerIcon },
     });

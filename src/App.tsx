@@ -16,6 +16,7 @@ import { DecodeToken } from "./types/types";
 function App() {
   const { logged } = useAppSelector((state) => state.user);
   const { loaded } = useAppSelector((state) => state.ui);
+  const { openForm } = useAppSelector((state) => state.newLocation);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -27,30 +28,30 @@ function App() {
   }, [dispatch, logged]);
 
   return (
-    // <>
-    //   {loaded && <LoadingSpinner />}
-    //   <Routes>
-    //     <Route path="/" element={<Navigate to="/welcome" />} />
-    //     <Route
-    //       path="/welcome"
-    //       element={
-    //         <AntiController>
-    //           <WelcomePage />
-    //         </AntiController>
-    //       }
-    //     />
-    //     <Route
-    //       path="/home"
-    //       element={
-    //         <Controller>
-    //           <HomePage />
-    //         </Controller>
-    //       }
-    //     />
-    //   </Routes>
-    //   <Toaster position="bottom-center" reverseOrder={false} />
-    // </>
-    <ModalForm />
+    <>
+      {loaded && <LoadingSpinner />}
+      {openForm && <ModalForm />}
+      <Routes>
+        <Route path="/" element={<Navigate to="/welcome" />} />
+        <Route
+          path="/welcome"
+          element={
+            <AntiController>
+              <WelcomePage />
+            </AntiController>
+          }
+        />
+        <Route
+          path="/home"
+          element={
+            <Controller>
+              <HomePage />
+            </Controller>
+          }
+        />
+      </Routes>
+      <Toaster position="bottom-center" reverseOrder={false} />
+    </>
   );
 }
 
