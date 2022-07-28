@@ -1,4 +1,3 @@
-import { mockLocations } from "../../mocks/mockLocations";
 import { LocationState } from "../../types/types";
 import locationsSlice, {
   addLocationActionCreator,
