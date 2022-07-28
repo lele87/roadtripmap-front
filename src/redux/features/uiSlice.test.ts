@@ -26,9 +26,9 @@ describe("Given a uiSlice reducer", () => {
       const expectedState = { loaded: true };
 
       const loadOnAction = loadedOnActionCreator();
-      const loadedOff = uiSlice(initialState, loadOnAction);
+      const loadedOn = uiSlice(initialState, loadOnAction);
 
-      expect(loadedOff).toEqual(expectedState);
+      expect(loadedOn).toEqual(expectedState);
     });
   });
 });

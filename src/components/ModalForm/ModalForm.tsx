@@ -89,6 +89,7 @@ const ModalForm = (): JSX.Element => {
         <input
           id="image"
           type="file"
+          multiple
           onChange={handleChangeImage}
           className="image-input"
         />

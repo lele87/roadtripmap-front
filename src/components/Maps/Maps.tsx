@@ -17,9 +17,10 @@ import {
 const Maps = () => {
   const dispatch = useAppDispatch();
   const locations = useAppSelector((state) => state.location);
-  const openForm = () => {
-    dispatch(openFormActionCreator());
-  };
+
+  // const openForm = () => {
+  //   dispatch(openFormActionCreator());
+  // };
 
   const markerIcon = L.icon({
     iconSize: [25, 41],
@@ -29,17 +30,16 @@ const Maps = () => {
     shadowUrl: "https://unpkg.com/leaflet@1.6/dist/images/marker-shadow.png",
   });
 
-  function MyComponent() {
+  const PrintMarks = () => {
     useMapEvents({
       click: (e) => {
         const { lat, lng } = e.latlng;
         dispatch(addCoordinatesActionCreator([lat, lng]));
         dispatch(openFormActionCreator());
-        // L.marker([lat, lng], { icon: markerIcon }).addTo(map);
       },
     });
     return null;
-  }
+  };
 
   return (
     <StyledMaps className="leaflet-container">
@@ -69,22 +69,27 @@ const Maps = () => {
                 location.geometry.coordinates[1],
               ]}
             >
-              <div>
+              <div className="location__info">
                 <h2>{location.properties.name}</h2>
                 <p>{location.properties.description}</p>
                 <img
-                  src={location.properties.image}
+                  src={
+                    location.properties.image.length === 0
+                      ? "no-image-icon.png"
+                      : location.properties.image[0]
+                  }
                   alt={location.properties.name}
                   width={300}
+                  height={200}
                 />
 
-                <button onClick={openForm}>Add location</button>
+                <button className="location__button">Delete location</button>
               </div>
             </Popup>
           </Marker>
         ))}
         <SearchBar />
-        <MyComponent />
+        <PrintMarks />
       </MapContainer>
     </StyledMaps>
   );
