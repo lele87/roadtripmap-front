@@ -1,6 +1,8 @@
+import { mockLocations } from "../../mocks/mockLocations";
 import { LocationState } from "../../types/types";
 import locationsSlice, {
   addLocationActionCreator,
+  deleteLocationActionCreator,
   loadLocationsActionCreator,
 } from "./locationsSlice";
 
@@ -94,6 +96,40 @@ describe("Given an add locations reducer", () => {
       const addLocationAction = addLocationActionCreator(locationInfo);
       const newState = locationsSlice(initialState, addLocationAction);
 
+      expect(newState).toEqual(expectedState);
+    });
+  });
+});
+
+describe("Given a deleteLocation reducer", () => {
+  describe("When it receives an initial state with 2 locations and a delete action with an id", () => {
+    test("Then it should return 1 location", () => {
+      const idToDelete = "2";
+
+      const deleteAction = deleteLocationActionCreator(idToDelete);
+
+      const initialState = {
+        features: [mockLocations.features[0], mockLocations.features[1]],
+      };
+
+      const expectedState = {
+        features: [
+          {
+            type: "Feature",
+            properties: {
+              id: "1",
+              name: "Lele's home",
+              description: "Carrer Templers Home",
+              image: "",
+            },
+            geometry: {
+              type: "Point",
+              coordinates: [41.38184338079825, 2.1788420566189455],
+            },
+          },
+        ],
+      };
+      const newState = locationsSlice(initialState, deleteAction);
       expect(newState).toEqual(expectedState);
     });
   });
