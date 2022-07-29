@@ -80,7 +80,7 @@ const Maps = () => {
                   }
                   alt={location.properties.name}
                   width={300}
-                  height={200}
+                  height={250}
                 />
 
                 <button className="location__button">Delete location</button>

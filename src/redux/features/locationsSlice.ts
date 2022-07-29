@@ -15,12 +15,18 @@ const locationsSlice = createSlice({
     addLocation: (location, action: PayloadAction<Location>) => ({
       features: [...location.features, action.payload],
     }),
+    deleteLocation: (location, action: PayloadAction<string>) => ({
+      features: location.features.filter(
+        (location) => location.properties.id !== action.payload
+      ),
+    }),
   },
 });
 
 export const {
   loadLocations: loadLocationsActionCreator,
   addLocation: addLocationActionCreator,
+  deleteLocation: deleteLocationActionCreator,
 } = locationsSlice.actions;
 
 export default locationsSlice.reducer;
