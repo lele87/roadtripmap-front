@@ -22,27 +22,35 @@ export interface DecodeToken {
   username: string;
   id: string;
 }
-
 export interface ResponseApi {
   data: {
     token: string;
   };
 }
-
 export interface Location {
   type: string;
+  id: string;
   properties: {
-    id: string;
     name: string;
     description: string;
-    images: string;
+    image: string;
   };
   geometry: {
     type: string;
     coordinates: number[];
   };
 }
-
 export interface LocationState {
   features: Location[];
+}
+
+export interface LocationForm {
+  name: string;
+  description: string;
+  image: string[] | File[];
+}
+
+export interface newLocation {
+  coordinates: number[];
+  openForm: boolean;
 }
