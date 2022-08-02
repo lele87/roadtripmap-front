@@ -13,8 +13,8 @@ describe("Given a load locations reducer", () => {
         features: [
           {
             type: "",
+            id: "",
             properties: {
-              id: "",
               name: "",
               description: "",
               image: "",
@@ -31,8 +31,8 @@ describe("Given a load locations reducer", () => {
         features: [
           {
             type: "Feature",
+            id: "1",
             properties: {
-              id: "1",
               name: "Lele's home",
               description: "Carrer Templers Home",
               image: "",
@@ -44,8 +44,8 @@ describe("Given a load locations reducer", () => {
           },
           {
             type: "Feature",
+            id: "2",
             properties: {
-              id: "2",
               name: "Francesco's home",
               description: "Carrer Carretes Home",
               image: "",
@@ -77,8 +77,8 @@ describe("Given an add locations reducer", () => {
 
       const locationInfo = {
         type: "Feature",
+        id: "1",
         properties: {
-          id: "1",
           name: "Casa Battlo",
           description: "",
           image: "image.jpg",
@@ -116,8 +116,8 @@ describe("Given a deleteLocation reducer", () => {
         features: [
           {
             type: "Feature",
+            id: "1",
             properties: {
-              id: "1",
               name: "Lele's home",
               description: "Carrer Templers Home",
               image: "",

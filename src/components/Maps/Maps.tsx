@@ -13,14 +13,11 @@ import {
   addCoordinatesActionCreator,
   openFormActionCreator,
 } from "../../redux/features/newLocationSlice";
+import { deleteLocationThunk } from "../../redux/thunks/locationsThunks";
 
 const Maps = () => {
   const dispatch = useAppDispatch();
   const locations = useAppSelector((state) => state.location);
-
-  // const openForm = () => {
-  //   dispatch(openFormActionCreator());
-  // };
 
   const markerIcon = L.icon({
     iconSize: [25, 41],
@@ -41,6 +38,10 @@ const Maps = () => {
     return null;
   };
 
+  const deleteLocation = (event: any, id: string) => {
+    dispatch(deleteLocationThunk(id));
+  };
+
   return (
     <StyledMaps className="leaflet-container">
       <MapContainer
@@ -54,40 +55,47 @@ const Maps = () => {
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         />
 
-        {locations.features.map((location) => (
-          <Marker
-            key={location.properties.id}
-            position={[
-              location.geometry.coordinates[0],
-              location.geometry.coordinates[1],
-            ]}
-            icon={markerIcon}
-          >
-            <Popup
+        {locations.features.map((location) => {
+          return (
+            <Marker
+              key={location.id}
               position={[
                 location.geometry.coordinates[0],
                 location.geometry.coordinates[1],
               ]}
+              icon={markerIcon}
             >
-              <div className="location__info">
-                <h2>{location.properties.name}</h2>
-                <p>{location.properties.description}</p>
-                <img
-                  src={
-                    location.properties.image.length === 0
-                      ? "no-image-icon.png"
-                      : location.properties.image[0]
-                  }
-                  alt={location.properties.name}
-                  width={300}
-                  height={250}
-                />
+              <Popup
+                position={[
+                  location.geometry.coordinates[0],
+                  location.geometry.coordinates[1],
+                ]}
+              >
+                <div className="location__info">
+                  <h2>{location.properties.name}</h2>
+                  <p>{location.properties.description}</p>
+                  <img
+                    src={
+                      location.properties.image.length === 0
+                        ? "no-image-icon.png"
+                        : location.properties.image[0]
+                    }
+                    alt={location.properties.name}
+                    width={300}
+                    height={250}
+                  />
 
-                <button className="location__button">Delete location</button>
-              </div>
-            </Popup>
-          </Marker>
-        ))}
+                  <button
+                    className="location__button"
+                    onClick={(event) => deleteLocation(event, location.id)}
+                  >
+                    Delete location
+                  </button>
+                </div>
+              </Popup>
+            </Marker>
+          );
+        })}
         <SearchBar />
         <PrintMarks />
       </MapContainer>

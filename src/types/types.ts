@@ -29,8 +29,8 @@ export interface ResponseApi {
 }
 export interface Location {
   type: string;
+  id: string;
   properties: {
-    id: string;
     name: string;
     description: string;
     image: string;

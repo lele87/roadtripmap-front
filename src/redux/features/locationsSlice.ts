@@ -17,7 +17,7 @@ const locationsSlice = createSlice({
     }),
     deleteLocation: (location, action: PayloadAction<string>) => ({
       features: location.features.filter(
-        (location) => location.properties.id !== action.payload
+        (location) => location.id !== action.payload
       ),
     }),
   },

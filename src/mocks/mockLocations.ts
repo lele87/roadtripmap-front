@@ -2,8 +2,8 @@ export const mockLocations = {
   features: [
     {
       type: "Feature",
+      id: "1",
       properties: {
-        id: "1",
         name: "Lele's home",
         description: "Carrer Templers Home",
         image: "",
@@ -15,8 +15,8 @@ export const mockLocations = {
     },
     {
       type: "Feature",
+      id: "2",
       properties: {
-        id: "2",
         name: "Francesco's home",
         description: "Carrer Carretes Home",
         image: "",
