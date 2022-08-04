@@ -6,24 +6,13 @@ const StyledModalForm = styled.div`
   align-items: center;
   justify-content: center;
   width: 500px;
-  height: 700px;
+  height: 500px;
   margin: 0 auto;
   background: #f2f2f2;
   color: white;
-  z-index: 10;
+  z-index: 1000;
   border-radius: 16px;
   box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
-
-  .modal__background {
-    background-color: rgba(0, 0, 0, 0.2);
-    width: 100vw;
-    height: 100vh;
-    z-index: 0;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    position: absolute;
-  }
 
   form {
     display: flex;

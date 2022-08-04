@@ -8,7 +8,7 @@ const StyledMaps = styled.div`
 
   .map {
     width: 100%;
-    height: 450px;
+    height: 550px;
     margin-bottom: 10px;
     max-width: 900px;
     display: flex;
