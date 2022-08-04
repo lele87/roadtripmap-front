@@ -50,6 +50,8 @@ export const addLocationThunk =
       if (new_location) {
         dispatch(loadedOffActionCreator());
         await dispatch(addLocationActionCreator(new_location));
+        toast.dismiss();
+        toast.success("You created a location");
         dispatch(loadLocationsThunk(userId));
       }
     } catch (error: any) {

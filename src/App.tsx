@@ -6,7 +6,7 @@ import "./App.css";
 import AntiController from "./components/AntiController/AntiController";
 import Controller from "./components/Controller/Controller";
 import LoadingSpinner from "./components/LoadingSpinner/LoadingSpinner";
-import ModalForm from "./components/ModalForm/ModalForm";
+
 import HomePage from "./pages/HomePage/HomePage";
 import WelcomePage from "./pages/WelcomePage/WelcomePage";
 import { loginActionCreator } from "./redux/features/usersSlice";
@@ -16,7 +16,7 @@ import { DecodeToken } from "./types/types";
 function App() {
   const { logged } = useAppSelector((state) => state.user);
   const { loaded } = useAppSelector((state) => state.ui);
-  const { openForm } = useAppSelector((state) => state.newLocation);
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -30,7 +30,6 @@ function App() {
   return (
     <>
       {loaded && <LoadingSpinner />}
-      {openForm && <ModalForm />}
       <Routes>
         <Route path="/" element={<Navigate to="/welcome" />} />
         <Route

@@ -14,15 +14,20 @@ import {
   openFormActionCreator,
 } from "../../redux/features/newLocationSlice";
 import { deleteLocationThunk } from "../../redux/thunks/locationsThunks";
+import ModalForm from "../ModalForm/ModalForm";
+import PositionMarker from "../PositionMarker/PositionMarker";
+import "leaflet-routing-machine";
+import "leaflet-routing-machine/dist/leaflet-routing-machine.css";
 
 const Maps = () => {
   const dispatch = useAppDispatch();
   const locations = useAppSelector((state) => state.location);
+  const { openForm } = useAppSelector((state) => state.newLocation);
 
   const markerIcon = L.icon({
     iconSize: [25, 41],
     iconAnchor: [10, 41],
-    popupAnchor: [2, -40],
+    popupAnchor: [2, -60],
     iconUrl: "https://unpkg.com/leaflet@1.6/dist/images/marker-icon.png",
     shadowUrl: "https://unpkg.com/leaflet@1.6/dist/images/marker-shadow.png",
   });
@@ -45,7 +50,7 @@ const Maps = () => {
   return (
     <StyledMaps className="leaflet-container">
       <MapContainer
-        center={[41.346176, 2.168365]}
+        center={[42.346176, 2.168365]}
         zoom={12}
         scrollWheelZoom={true}
         className="map"
@@ -54,7 +59,7 @@ const Maps = () => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         />
-
+        {openForm && <ModalForm />}
         {locations.features.map((location) => {
           return (
             <Marker
@@ -98,6 +103,7 @@ const Maps = () => {
         })}
         <SearchBar />
         <PrintMarks />
+        <PositionMarker />
       </MapContainer>
     </StyledMaps>
   );
