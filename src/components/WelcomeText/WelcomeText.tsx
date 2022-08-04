@@ -9,7 +9,7 @@ const WelcomeText = (): JSX.Element => {
             <img src="/images/trippy_logo314.webp" alt="trippy logo" />
           </div>
           <div className="welcome__paragraph--container">
-            <p>Create your perfect road trip</p>
+            <p>Remember your trips</p>
           </div>
         </div>
       </StyledWelcomeText>
