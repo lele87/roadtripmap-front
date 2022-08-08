@@ -7,7 +7,9 @@ describe("Given a WelcomeText component", () => {
       render(<WelcomeText />);
 
       const expectedImage = screen.getByAltText("trippy logo");
-      const expectedText = screen.getByText("Remember your trips");
+      const expectedText = screen.getByText(
+        "Remember the best places you've visited"
+      );
 
       expect(expectedImage).toBeInTheDocument();
       expect(expectedText).toBeInTheDocument();

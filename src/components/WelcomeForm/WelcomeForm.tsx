@@ -14,6 +14,11 @@ const WelcomeForm = (): JSX.Element => {
   };
 
   const [formData, setFormData] = useState(blankFields);
+  const [passwordType, setPasswordType] = useState("password");
+  const [eye, setEye] = useState(true);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [type, settype] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [openingForm, setOpeningForm] = useState("loginForm");
   const userInfo = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
@@ -49,61 +54,112 @@ const WelcomeForm = (): JSX.Element => {
     setFormData(blankFields);
   };
 
+  const showHidePassword = () => {
+    if (passwordType === "password") {
+      setPasswordType("text");
+      setEye(false);
+      settype(true);
+    } else {
+      setPasswordType("password");
+      setEye(true);
+      settype(false);
+    }
+  };
+
   return (
     <>
       <StyledWelcomeForm className="form">
-        <form className="welcome-form" onSubmit={handleSubmit}>
-          <label htmlFor="username"></label>
-          <input
-            id="username"
-            formNoValidate
-            autoComplete="off"
-            type="text"
-            value={formData.username}
-            placeholder="username"
-            onChange={changeData}
-          />
-          <label htmlFor="password"></label>
-          <input
-            id="password"
-            formNoValidate
-            autoComplete="off"
-            type="password"
-            value={formData.password}
-            placeholder="password"
-            onChange={changeData}
-          />
-          {openingForm === "loginForm" && (
+        {openingForm === "loginForm" && (
+          <form className="welcome__form--login" onSubmit={handleSubmit}>
+            <div className="input__text">
+              <div className="input__text--username">
+                <label htmlFor="username"></label>
+                <input
+                  id="username"
+                  formNoValidate
+                  autoComplete="off"
+                  type="text"
+                  value={formData.username}
+                  placeholder="username"
+                  onChange={changeData}
+                />
+              </div>
+              <div className="input__text--password">
+                <label htmlFor="password"></label>
+                <input
+                  id="password"
+                  formNoValidate
+                  autoComplete="off"
+                  type={passwordType}
+                  value={formData.password}
+                  placeholder="password"
+                  onChange={changeData}
+                />
+                <i
+                  onClick={showHidePassword}
+                  className={`fa ${eye ? "fa-eye-slash" : "fa-eye"}`}
+                ></i>
+              </div>
+            </div>
             <>
               <button
-                className="submit-button"
+                className="submit__button"
                 disabled={formData.username === "" || formData.password === ""}
                 type="submit"
               >
                 Login
               </button>
-              <div className="welcome-form_message">
+              <div className="welcome__form_message">
                 <p>Not registered?</p>
                 <span onClick={changeForm}>Create an account</span>
               </div>
             </>
-          )}
-          {openingForm === "registerForm" && (
-            <>
+          </form>
+        )}
+        {openingForm === "registerForm" && (
+          <>
+            <form className="welcome__form--register" onSubmit={handleSubmit}>
+              <label htmlFor="username"></label>
+              <input
+                id="username"
+                formNoValidate
+                autoComplete="off"
+                type="text"
+                value={formData.username}
+                placeholder="username"
+                onChange={changeData}
+              />
+              <div className="input__text--password">
+                <label htmlFor="password"></label>
+                <input
+                  id="password"
+                  formNoValidate
+                  autoComplete="off"
+                  type={passwordType}
+                  value={formData.password}
+                  placeholder="password"
+                  onChange={changeData}
+                />
+                <i
+                  onClick={showHidePassword}
+                  className={`fa ${eye ? "fa-eye-slash" : "fa-eye"}`}
+                ></i>
+              </div>
+
               <button
-                className="submit-button"
+                className="submit__button"
                 disabled={formData.username === "" || formData.password === ""}
                 type="submit"
               >
                 Register
               </button>
-              <div className="welcome-form_message">
+              <div className="welcome__form_message">
                 <p>Already registered?</p>
                 <span onClick={changeForm}>Sign In</span>
               </div>
-            </>
-          )}
-        </form>
+            </form>
+          </>
+        )}
       </StyledWelcomeForm>
     </>
   );

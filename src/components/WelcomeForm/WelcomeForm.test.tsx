@@ -66,6 +66,7 @@ describe("Given a WelcomeForm component", () => {
 
       const usernameInput = screen.getByPlaceholderText("username");
       const passwordInput = screen.getByPlaceholderText("password");
+
       const loginButton = screen.getByRole("button", { name: "Login" });
 
       userEvent.type(usernameInput, username);

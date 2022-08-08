@@ -2,26 +2,24 @@ import { useEffect } from "react";
 import Maps from "../../components/Maps/Maps";
 import { useAppDispatch, useAppSelector } from "../../redux/store/hooks";
 import { loadLocationsThunk } from "../../redux/thunks/locationsThunks";
-import styled from "styled-components";
-
-const StyledHomePage = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  background-image: url("/images/caraibi.jpeg");
-  background-size: cover;
-
-  h2 {
-    text-align: center;
-    font-family: "Roboto";
-    color: white;
-    letter-spacing: 3px;
-  }
-`;
+import { logoutActionCreator } from "../../redux/features/usersSlice";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import StyledHomePage from "./StyledHomePage";
 
 const HomePage = (): JSX.Element => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const { id, username } = useAppSelector((state) => state.user.userInfo);
+
+  const logOut = () => {
+    dispatch(logoutActionCreator());
+
+    localStorage.removeItem("token");
+    toast.dismiss();
+    toast.success("You have succesfully logged out");
+    navigate("/");
+  };
 
   useEffect(() => {
     dispatch(loadLocationsThunk(id));
@@ -29,7 +27,10 @@ const HomePage = (): JSX.Element => {
 
   return (
     <>
-      <StyledHomePage>
+      <StyledHomePage className="homepage__container">
+        <button className="homepage--logout__button" onClick={logOut}>
+          Logout
+        </button>
         <h2>
           Hi {username.charAt(0).toUpperCase() + username.slice(1)}, search and
           mark on the map the best places you've visited during your trips!
