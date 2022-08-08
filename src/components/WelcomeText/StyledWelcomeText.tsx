@@ -10,10 +10,12 @@ const StyledWelcomeText = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-family: "Cairo", sans-serif;
+    font-family: "JetBrains Mono", monospace;
     font-weight: 700;
     color: #fff;
-    font-size: 33px;
+    font-size: 24px;
+    letter-spacing: 1.5px;
+    margin-left: 5px;
   }
 `;
 

@@ -17,10 +17,13 @@ describe("Given a Welcome Page", () => {
 
       const usernameInput = screen.getByPlaceholderText("username");
       const passwordInput = screen.getByPlaceholderText("password");
+
       const button = screen.getByRole("button");
 
       const expectedImage = screen.getByAltText("trippy logo");
-      const expectedText = screen.getByText("Create your perfect road trip");
+      const expectedText = screen.getByText(
+        "Remember the best places you've visited"
+      );
 
       expect(usernameInput).toBeInTheDocument();
       expect(passwordInput).toBeInTheDocument();

@@ -1,17 +1,43 @@
 import styled from "styled-components";
 
 const StyledWelcomeForm = styled.div`
-  position: relative;
-  z-index: 1;
-  background: #ffffff;
-  max-width: 360px;
-  margin: 0 auto 100px;
-  padding: 45px;
-  margin-top: 20px;
-  text-align: center;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  .welcome__form--login {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    position: relative;
+    z-index: 1000;
+    background: #ffffff;
+    width: 360px;
+    height: 35vh;
+    margin: 0 auto 100px;
+    padding: 45px;
+    margin-top: 20px;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  }
 
-  .welcome-form input {
+  .welcome__form--register {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    height: 35vh;
+    position: relative;
+    z-index: 1000;
+    background: #ffffff;
+    width: 360px;
+    margin: 0 auto 100px;
+    padding: 45px;
+    margin-top: 20px;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  }
+
+  .input__text--password {
+    margin-left: -5px;
+  }
+
+  input {
     font-family: "Roboto", sans-serif;
     outline: 0;
     background: #f2f2f2;
@@ -22,37 +48,38 @@ const StyledWelcomeForm = styled.div`
     box-sizing: border-box;
     font-size: 14px;
   }
-  .welcome-form button {
+  .submit__button {
     font-family: "Roboto", sans-serif;
     outline: 0;
     background: #4caf50;
     width: 100%;
     border: 0;
     padding: 15px;
+    margin-top: 15px;
     color: #ffffff;
     font-size: 18px;
     -webkit-transition: all 0.3 ease;
     transition: all 0.3 ease;
     cursor: pointer;
   }
-  .welcome-form button:hover,
-  .welcome-form button:active,
-  .welcome-form button:focus {
+  .submit__button:hover,
+  .submit__button:active,
+  .submit__button:focus {
     background: #43a047;
   }
 
-  .welcome-form_message {
+  .welcome__form_message {
     display: flex;
     flex-direction: column;
     gap: 8px;
   }
 
-  .welcome-form_message p {
+  .welcome__form_message p {
     margin: 15px 0 0;
     color: #b3b3b3;
     font-size: 12px;
   }
-  .welcome-form_message span {
+  .welcome__form_message span {
     color: #4caf50;
     text-decoration: none;
     cursor: pointer;
@@ -69,6 +96,11 @@ const StyledWelcomeForm = styled.div`
     font-family: "Roboto", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  i {
+    margin-left: -30px;
+    cursor: pointer;
   }
 `;
 
